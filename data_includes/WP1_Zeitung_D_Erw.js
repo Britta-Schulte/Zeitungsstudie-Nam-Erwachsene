@@ -12,12 +12,15 @@ newTrial("Consent",
  newImage("HU","HU Logo.png")
         .size(289,65)
     ,
-
+    newImage("UNam","UNam Logo.png")
+    .size(230,60)
+    ,
     newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
         .add(100,0, getImage("HU"))
+        .add(450,0, getImage("UNam"))
         .add(750,0, getImage("SFB"))
         .center()
         .print()
@@ -47,6 +50,7 @@ newTrial("Info",
     ,
     newCanvas("Logosnebeneinander",1138,100)
         .add(100,0, getImage("HU"))
+        .add(450,0, getImage("UNam"))
         .add(750,0, getImage("SFB"))
         .center()
         .print()
@@ -74,11 +78,15 @@ newTrial("Code",
     newImage("HU","HU Logo.png")
         .size(289,65)
     ,
-        newImage("SFB","SFB Logo.png")
+    newImage("UNam","UNam Logo.png")
+    .size(230,60)
+    ,
+    newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
         .add(100,0, getImage("HU"))
+        .add(450,0, getImage("UNam"))
         .add(750,0, getImage("SFB"))
         .center()
         .print()
@@ -224,11 +232,15 @@ newTrial("Meta1",
     newImage("HU","HU Logo.png")
         .size(289,65)
     ,
+    newImage("UNam","UNam Logo.png")
+    .size(230,60)
+    ,
      newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
         .add(100,0, getImage("HU"))
+        .add(450,0, getImage("UNam"))
         .add(750,0, getImage("SFB"))
         .center()
         .print()
@@ -451,11 +463,15 @@ newTrial("Meta2",
 newImage("HU","HU Logo.png")
         .size(289,65)
     ,
+    newImage("UNam","UNam Logo.png")
+    .size(230,60)
+    ,
         newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
         .add(100,0, getImage("HU"))
+        .add(450,0, getImage("UNam"))
         .add(750,0, getImage("SFB"))
         .center()
         .print()
