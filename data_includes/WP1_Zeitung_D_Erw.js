@@ -186,11 +186,16 @@ Template(
     row => newTrial( "Trial" ,
         defaultImage.css("margin","1em")
         ,
-        newImage("Header","BHeader.png")
+        newImage("Header","Zeitungsheader.png")
         .settings.css("width, 50%")
         .center().print()
-
         ,
+        newImage("Subheader","Subheader.png")
+        .settings.css("width, 50%")
+        .center().print()
+        ,
+       
+        
         newCanvas("Top_nebeneinander","auto","auto")
             .add(600,40, newTextInput("Top_Korrektur").size(300,200) .lines(15) )
             .center().print()
