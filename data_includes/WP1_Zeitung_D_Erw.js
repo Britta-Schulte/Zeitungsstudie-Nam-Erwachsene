@@ -5,14 +5,14 @@ PennController.DebugOff();
 Sequence("Info","Consent","Code","Anleitung","Counter","Trial","Meta1","Meta2","send","Final");
 SetCounter("Counter","inc",1);
 
-//New Consent
+//New Consent 
 //Mit Boxen zum Anklicken und Dateien zum herunterladen; angelehnt an C04
 
 newTrial("Consent",
  newImage("HU","HU Logo.png")
         .size(289,65)
     ,
-    newImage("UNam","UNam Logo.png")
+newImage("UNam","UNam Logo.png")
     .size(230,60)
     ,
     newImage("SFB","SFB Logo.png")
@@ -44,7 +44,9 @@ newTrial("Info",
     newImage("HU","HU Logo.png")
         .size(289,65)
     ,
-
+newImage("UNam","UNam Logo.png")
+    .size(230,60),
+  
     newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
@@ -137,7 +139,7 @@ newHtml("Anleitung","anleitung.html")
     .center()
     .print()
 ,
-newImage("Erklärbild","Erklärbild.png")
+newImage("Erklärbild","Erklärbild2.png")
     .size(800,370)
     .print()
 ,
@@ -178,7 +180,7 @@ newButton("Weiter","Experiment beginnen")
     ),
 //Zeitung
 Template(
-    GetTable("BListenaufteilung.csv")
+    GetTable("AListenaufteilung.csv")
     .setGroupColumn( "Liste" )
     ,
     row => newTrial( "Trial" ,
@@ -343,32 +345,32 @@ newTrial("Meta1",
                .print()
                ,
                //Studium
-               newText("studium","<b>Studieren Sie?</b><br><small>(Falls ja, welches Fach und Fachsemester?)</small><br><br>")
+               newText("ausland","<b>Waren Sie länger als 6 Monate am Stück in Deutschland?</b><br><small>(Falls ja, wann und wie lange?)</small><br><br>")
                .settings.css("font-size", "18px")
 
                ,
-               newTextInput("studiuminput")
+               newTextInput("auslandinput")
                .settings.size(150,40)
                .log()
                .settings.hidden()
                ,
-               newText("studium_input", "")
-               .settings.after(getTextInput("studiuminput"))
+               newText("ausland_input", "")
+               .settings.after(getTextInput("auslandinput"))
                ,
-               newDropDown("studium",  "<br>" +"Bitte eine Option ausw&auml;hlen")
+               newDropDown("ausland",  "<br>" +"Bitte eine Option ausw&auml;hlen")
                .settings.add("Ja", "Nein")
                .log()
-               .settings.after(getText("studium_input"))
+               .settings.after(getText("ausland_input"))
                .settings.callback(
-                   getDropDown("studium")
-                   .test.selected("Ja")
-                   .success(getTextInput("studiuminput").settings.visible(
+                   getDropDown("ausland")
+                    .test.selected("Ja")
+                   .success(getTextInput("auslandinput").settings.visible(
 
                    )) )
                ,
-               newCanvas("studium", 1000, 40)
-               .settings.add(0, 0, getText("studium"))
-               .settings.add(500,3, getDropDown("studium"))
+               newCanvas("ausland", 1000, 40)
+               .settings.add(0, 0, getText("ausland"))
+               .settings.add(500,3, getDropDown("ausland"))
                //.settings.center()
                .print()
                ,
@@ -423,8 +425,8 @@ newTrial("Meta1",
             ) .and( getDropDown("abschluss").test.selected()
                     .failure( newText('errorabschluss', "<br>Bitte höchsten Abschluss angeben.").color("red") .center().print() )
 
-            ).and( getDropDown("studium").test.selected()
-                   .failure( newText('errorstudium', "<br>Bitte Studium angeben.").color("red") .center().print() )
+            ).and( getDropDown("ausland").test.selected()
+                   .failure( newText('errorausland', "<br>Bitte Informationen zum Aufland in Deutschland angeben.").color("red") .center().print() )
 
             ).and(getDropDown("leiter").test.selected()
                    .failure( newText('leitererr', "<br>Bitte Variante auf der Leiter angeben.").color("red") .center().print() )
@@ -452,7 +454,7 @@ newTrial("Meta1",
                ,
                getDropDown("sex").wait("first")
                ,
-                getDropDown("studium").wait("first")
+                getDropDown("ausland").wait("first")
                ,
                getDropDown("leiter").wait("first")
                ,
