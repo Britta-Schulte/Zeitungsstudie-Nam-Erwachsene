@@ -185,7 +185,7 @@ Template(
     row => newTrial( "Trial" ,
         defaultImage.css("margin","1em")
         ,
-        newImage("Header","BHeader.png")
+        newImage("Header","Zeitungsheader.png")
         .settings.css("width, 50%")
         .center().print()
 
