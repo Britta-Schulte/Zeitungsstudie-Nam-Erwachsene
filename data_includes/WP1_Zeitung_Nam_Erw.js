@@ -179,7 +179,7 @@ newButton("Weiter","Experiment beginnen")
     ),
 //Zeitung
 Template(
-    GetTable("BListenaufteilung.csv")
+    GetTable("AListenaufteilung.csv")
     .setGroupColumn( "Liste" )
     ,
     row => newTrial( "Trial" ,
