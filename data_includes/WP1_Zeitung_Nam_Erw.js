@@ -188,7 +188,6 @@ Template(
         newImage("Header","Zeitungsheader.png")
         .settings.css("width, 50%")
         .center().print()
-
         ,
         newCanvas("Top_nebeneinander","auto","auto")
             .add(600,40, newTextInput("Top_Korrektur").size(300,200) .lines(15) )
@@ -589,6 +588,28 @@ newText("Leerzeile"," <br></p>")
         .print()
 ,
     getTextInput("Dialekt")
+        .log("final")
+,
+
+newText("Leerzeile"," <br></p>")
+                 .center()
+                .print()
+                 ,
+newText("Email","<b>Dürften wir dich in Zukunft erneut kontaktieren?</b><br>Wenn ja, bitte Emailadresse angeben.<br>Die Angabe der Kontaktdaten ist freiwillig. Um Anonymität zu gewährleisten, wird diese Angabe getrennt vom ausgefüllten Fragebogen archiviert.")
+//        .center()
+        .print()
+,
+    newCanvas("Email", 1, 10)
+ //       .center()
+        .print()
+,
+
+    newTextInput("Email")
+ //       .center()
+        .size(600,80)
+        .print()
+,
+    getTextInput("Email")
         .log("final")
 ,
 newText("Leerzeile"," <br></p>")
