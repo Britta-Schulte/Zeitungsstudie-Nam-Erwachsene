@@ -1,30 +1,30 @@
 PennController.ResetPrefix(null);
 PennController.AddHost("https://amor.cms.hu-berlin.de/~idlsfbnd/zeitungsstudie/");
 PennController.DebugOff();
-
+var progressBarText = "Fortschritt";  
 Sequence("Info","Consent","Code","Anleitung","Counter","Trial","Meta1","Meta2","send","Final");
 SetCounter("Counter","inc",1);
 
-//New Consent 
+//New Consent
 //Mit Boxen zum Anklicken und Dateien zum herunterladen; angelehnt an C04
 
 newTrial("Consent",
- newImage("HU","HU Logo.png")
-        .size(289,65)
-    ,
+newImage("HU","HU Logo.png")
+.size(289,65)
+,
 newImage("UNam","UNam Logo.png")
-    .size(230,60)
-    ,
-    newImage("SFB","SFB Logo.png")
-        .size(280,86)
-    ,
-    newCanvas("Logosnebeneinander",1138,100)
-        .add(100,0, getImage("HU"))
-        .add(450,0, getImage("UNam"))
-        .add(750,0, getImage("SFB"))
-        .center()
-        .print()
-    ,
+.size(230,60)
+,
+newImage("SFB","SFB Logo.png")
+.size(280,86)
+,
+newCanvas("Logosnebeneinander",1138,100)
+.add(100,0, getImage("HU"))
+.add(450,0, getImage("UNam"))
+.add(750,0, getImage("SFB"))
+.center()
+.print()
+,
     newHtml("Consent", "consent.html")
         .center()
         .settings.css("font-size", "large")
@@ -44,9 +44,9 @@ newTrial("Info",
     newImage("HU","HU Logo.png")
         .size(289,65)
     ,
-newImage("UNam","UNam Logo.png")
-    .size(230,60),
-  
+    newImage("UNam","UNam Logo.png")
+        .size(230,60)
+    ,
     newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
@@ -81,7 +81,7 @@ newTrial("Code",
         .size(289,65)
     ,
     newImage("UNam","UNam Logo.png")
-    .size(230,60)
+        .size(230,60)
     ,
     newImage("SFB","SFB Logo.png")
         .size(280,86)
@@ -93,7 +93,6 @@ newTrial("Code",
         .center()
         .print()
     ,
-
     newHtml("Code", "code.html")
         .center()
         .settings.css("font-size", "large")
@@ -122,7 +121,7 @@ newTrial("Code",
         .center()
         .print()
         .wait(
-            getTextInput("Texteingabe-Code").test.text(/^.+/)
+            getTextInput("Texteingabe-Code").test.text( /[a-zA-Z]+[0-9]+[a-zA-Z]+/i)
                     .failure( newText('errorcode', "<br>Bitte gib den Code ein.").color("red") .center().print() )
             )
 ,
@@ -180,22 +179,17 @@ newButton("Weiter","Experiment beginnen")
     ),
 //Zeitung
 Template(
-    GetTable("AListenaufteilung.csv")
+    GetTable("BListenaufteilung.csv")
     .setGroupColumn( "Liste" )
     ,
     row => newTrial( "Trial" ,
         defaultImage.css("margin","1em")
         ,
-        newImage("Header","Zeitungsheader.png")
+        newImage("Header","BHeader.png")
         .settings.css("width, 50%")
         .center().print()
+
         ,
-        newImage("Subheader","Subheader.png")
-        .settings.css("width, 50%")
-        .center().print()
-        ,
-       
-        
         newCanvas("Top_nebeneinander","auto","auto")
             .add(600,40, newTextInput("Top_Korrektur").size(300,200) .lines(15) )
             .center().print()
@@ -223,9 +217,9 @@ Template(
         .center().print()
         .wait(
             newFunction('dummy', ()=>true).test.is(true)
-            .and(getTextInput("Top_Korrektur").test.text(/[a-z]+/)
+            .and(getTextInput("Top_Korrektur").test.text(/^.+/)
                     .failure( newText('errorcode_top', "<br>Korrektur eingeben.Wenn nichts korrigiert werden soll: keine Korrekturen eingeben").color("red").print() )
-            ).and(getTextInput("Bottom_Korrektur").test.text(/[a-z]+/)
+            ).and(getTextInput("Bottom_Korrektur").test.text(/^.+/)
                     .failure( newText('errorcode_bottom', "<br>Korrektur eingeben.Wenn nichts korrigiert werden soll: keine Korrekturen eingeben").color("red").print() )
             ))
     )
@@ -240,9 +234,9 @@ newTrial("Meta1",
         .size(289,65)
     ,
     newImage("UNam","UNam Logo.png")
-    .size(230,60)
+        .size(230,60)
     ,
-     newImage("SFB","SFB Logo.png")
+    newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
@@ -251,7 +245,7 @@ newTrial("Meta1",
         .add(750,0, getImage("SFB"))
         .center()
         .print()
- ,
+    ,
 
     newText("Meta-1", "<b>Personenbezogene Daten</b> <p>Wir brauchen einige persönliche Angaben von Ihnen. Diese werden anonymisiert gespeichert und eine spätere Zuordnung zu Ihnen wird nicht möglich sein. Bitte nehmen Sie sich beim Ausfüllen der Felder Zeit.<p>")
  //       .settings.css("text-align","justify")
@@ -339,7 +333,7 @@ newTrial("Meta1",
                .settings.bold()
                ,
                newDropDown("abschluss", "Bitte eine Option ausw&auml;hlen")
-               .settings.add("kein Abschluss","Schulabschluss","Abitur oder gleichwertiger Abschluss","Studium ohne Abschluss","Bachelor","Master","Diplom/Magister", "Promotion", "Ausbildung", "Sonstige")     // MAYBE ADD QUESTIONS ABOUT DIALECT AND DOMINANT HAND
+               .settings.add("kein Abschluss","Schulabschluss","Abitur oder gleichwertiger Abschluss","Studium ohne Abschluss","Bachelor","Master", "Promotion","Magister","Diplom", "Ausbildung", "Sonstige")     // MAYBE ADD QUESTIONS ABOUT DIALECT AND DOMINANT HAND
                //.settings.size(191,20)
                .log()
                ,
@@ -350,32 +344,66 @@ newTrial("Meta1",
                .print()
                ,
                //Studium
-               newText("ausland","<b>Waren Sie länger als 6 Monate am Stück in Deutschland?</b><br><small>(Falls ja, wann und wie lange?)</small><br><br>")
+               newText("schule","<b>Sind Sie in Deutschland zur Schule gegangen?</b><br><small>(Falls nein, wo?)</small><br><br>")
                .settings.css("font-size", "18px")
 
                ,
-               newTextInput("auslandinput")
+               newTextInput("schuleinput")
                .settings.size(150,40)
                .log()
                .settings.hidden()
                ,
-               newText("ausland_input", "")
-               .settings.after(getTextInput("auslandinput"))
+               newText("schule_input", "")
+               .settings.after(getTextInput("schuleinput"))
                ,
-               newDropDown("ausland",  "<br>" +"Bitte eine Option ausw&auml;hlen")
+               newDropDown("schule",  "<br>" +"Bitte eine Option ausw&auml;hlen")
+               .settings.add("Ja","Nein")
+               .log()
+               .settings.after(getText("schule_input"))
+               .settings.callback(
+                   getDropDown("schule")
+                   .test.selected("Nein")
+                   .success(getTextInput("schuleinput").settings.visible())
+
+                    )
+               ,
+               newCanvas("schule",1000, 40)
+               .settings.add(0, 0, getText("schule"))
+               .settings.add(470,3, getDropDown("schule"))
+               //.settings.center()
+               .print()
+               ,
+               newCanvas("filler", 1, 20)
+
+               .print()
+               ,
+               //Studium
+               newText("studium","<b>Studieren Sie?</b><br><small>(Falls ja, welches Fach und Fachsemester?)</small><br><br>")
+               .settings.css("font-size", "18px")
+
+               ,
+               newTextInput("studiuminput")
+               .settings.size(150,40)
+               .log()
+               .settings.hidden()
+               ,
+               newText("studium_input", "")
+               .settings.after(getTextInput("studiuminput"))
+               ,
+               newDropDown("studium",  "<br>" +"Bitte eine Option ausw&auml;hlen")
                .settings.add("Ja", "Nein")
                .log()
-               .settings.after(getText("ausland_input"))
+               .settings.after(getText("studium_input"))
                .settings.callback(
-                   getDropDown("ausland")
-                    .test.selected("Ja")
-                   .success(getTextInput("auslandinput").settings.visible(
+                   getDropDown("studium")
+                   .test.selected("Ja")
+                   .success(getTextInput("studiuminput").settings.visible(
 
                    )) )
                ,
-               newCanvas("ausland", 1000, 40)
-               .settings.add(0, 0, getText("ausland"))
-               .settings.add(500,3, getDropDown("ausland"))
+               newCanvas("studium", 1000, 40)
+               .settings.add(0, 0, getText("studium"))
+               .settings.add(500,3, getDropDown("studium"))
                //.settings.center()
                .print()
                ,
@@ -395,7 +423,7 @@ newTrial("Meta1",
                .settings.add("A", "B", "C","D", "E", "F","G", "H", "I","J")
                .log()
                ,
-               newImage("leiter", "https://amor.cms.hu-berlin.de/~patarroa/Leiter.jpeg")
+               newImage("leiter", "Leiter.jpeg")
                .settings.size(200,300)
                ,
                newCanvas("leitercanvas", 1000,20)
@@ -430,9 +458,10 @@ newTrial("Meta1",
             ) .and( getDropDown("abschluss").test.selected()
                     .failure( newText('errorabschluss', "<br>Bitte höchsten Abschluss angeben.").color("red") .center().print() )
 
-            ).and( getDropDown("ausland").test.selected()
-                   .failure( newText('errorausland', "<br>Bitte Informationen zum Aufland in Deutschland angeben.").color("red") .center().print() )
-
+            ).and( getDropDown("studium").test.selected()
+                   .failure( newText('errorstudium', "<br>Bitte Studium angeben.").color("red") .center().print() )
+             ).and( getDropDown("schule").test.selected()
+                   .failure( newText('errorschule', "<br>Bitte Land der Beschulung angeben.").color("red") .center().print() )
             ).and(getDropDown("leiter").test.selected()
                    .failure( newText('leitererr', "<br>Bitte Variante auf der Leiter angeben.").color("red") .center().print() )
 
@@ -459,21 +488,22 @@ newTrial("Meta1",
                ,
                getDropDown("sex").wait("first")
                ,
-                getDropDown("ausland").wait("first")
+                getDropDown("studium").wait("first")
                ,
                getDropDown("leiter").wait("first")
                ,
                getDropDown("abschluss").wait("first")
+  )
   ,
   //Metadaten 2: Sprachbiographie
 newTrial("Meta2",
-newImage("HU","HU Logo.png")
-        .size(289,65)
+    newImage("HU","HU Logo.png")
+         .size(289,65)
     ,
     newImage("UNam","UNam Logo.png")
-    .size(230,60)
+        .size(230,60)
     ,
-        newImage("SFB","SFB Logo.png")
+    newImage("SFB","SFB Logo.png")
         .size(280,86)
     ,
     newCanvas("Logosnebeneinander",1138,100)
@@ -483,7 +513,6 @@ newImage("HU","HU Logo.png")
         .center()
         .print()
     ,
-
        newText("SprachenMutter","<b>Welche Sprachen spricht/sprach Ihre Mutter?</b><br>Bitte sortieren und mit der am besten gesprochenen Sprache beginnen.")
  //       .center()
         .print()
@@ -581,19 +610,24 @@ newText("Leerzeile"," <br></p>")
                    newText("errormutter","<br>Bitte Sprachen der Mutter angeben")
                    .settings.color("red")
                    .center()
-                   .print())
+                   .print()
+                   )
                 ).and(
              getTextInput("SprachenVater").test.text(/^.+/) // testing if at least one digit was written in the input box
                 .failure(
                    newText("errorvater","<br>Bitte Sprachen des Vaters angeben.")
                    .settings.color("red")
                    .center()
-                   .print())
-             ).and(
+                   .print()
+                   )
+                ).and(
              getTextInput("SprachenSelbst").test.text(/^.+/) // testing if at least one digit was written in the input box
                 .failure(
-                   newText("errorselbst","<br>Bitte angeben wo Sie aufgewachsen sind.")
+                   newText("errorselbst","<br>Bitte angeben welche Sprachen Sie sprechen.")
                    .settings.color("red")
+                   .center()
+                   .print()
+                   )
             ).and(
              getTextInput("Dialekt").test.text(/^.+/) // testing if at least one digit was written in the input box
                 .failure(
@@ -601,14 +635,14 @@ newText("Leerzeile"," <br></p>")
                    .settings.color("red")
                    .center()
                    .print())
-            )  )
+            ) 
 
+            )
  )
- )
-),
+,
 
 // Send results manually
-SendResults("send")
+SendResults("send");
 
 newTrial("Final",
          newText("<p>Vielen Dank f&uuml;r Ihre Teilnahme! Die Studie ist hiermit beendet. </p>")
