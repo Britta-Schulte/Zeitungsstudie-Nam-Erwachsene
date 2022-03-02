@@ -28,6 +28,7 @@ newCanvas("Logosnebeneinander",1138,100)
     newHtml("Consent", "consent.html")
         .center()
         .settings.css("font-size", "large")
+        .checkboxWarning("Bitte die Box %name% anklicken.")
         .print()
 ,
     newButton("Weiter","Weiter")
@@ -122,7 +123,7 @@ newTrial("Code",
         .print()
         .wait(
             getTextInput("Texteingabe-Code").test.text( /[a-zA-Z]+[0-9]+[a-zA-Z]+/i)
-                    .failure( newText('errorcode', "<br>Bitte gib den Code ein.").color("red") .center().print() )
+                    .failure( newText('errorcode', "<br>Bitte Code eingeben.").color("red") .center().print() )
             )
 ,
     newText("Leerzeile"," <br></p>")
@@ -343,7 +344,7 @@ newTrial("Meta1",
                .print()
                ,
                //Studium
-               newText("schule","<b>Sind Sie in Deutschland zur Schule gegangen?</b><br><small>(Falls nein, wo?)</small><br><br>")
+               newText("schule","<b>Sind Sie in Namibia zur Schule gegangen?</b><br><small>(Falls nein, wo?)</small><br><br>")
                .settings.css("font-size", "18px")
 
                ,
@@ -412,7 +413,7 @@ newTrial("Meta1",
                ,
 
               //Leiter
-               newText("Leiter","<b>Die untenstehende Leiter</b> repr&auml;sentiert den relativen Sozialstatus der Menschen in Deutschland. "
+               newText("Leiter","<b>Die untenstehende Leiter</b> repr&auml;sentiert den relativen Sozialstatus der Menschen in Namibia. "
                        +"An der Spitze der Leiter stehen Menschen mit relativ hohem Status – diejenigen, die das meiste Geld, die beste Bildung und die angesehensten Arbeitspl&auml;tze haben. Ganz unten sind Menschen mit relativ niedrigem Status – beispielsweise als arbeitslos Gemeldete. Relativ weit unten zu verorten w&auml;ren auch diejenigen, die nur wenig Geld verdienen, einen niedrigen Bildungstand haben, und / oder Berufe aus&uuml;ben, die die Gesellschaft als eher wenig respektabel ansieht."
                        +"<br> Wo w&uuml;rden Sie Sich auf dieser Leiter einordnen? W&auml;hlen Sie bitte die Sprosse, die Ihrem empfundenen Sozialstatus am ehesten entspricht.")
                .settings.css("font-size", "18px")
@@ -644,7 +645,7 @@ newText("Leerzeile"," <br></p>")
                 ).and(
              getTextInput("SprachenSelbst").test.text(/^.+/) // testing if at least one digit was written in the input box
                 .failure(
-                   newText("errorselbst","<br>Bitte angeben welche Sprachen Sie sprechen.")
+                   newText("errorselbst","<br>Bitte angeben, welche Sprachen Sie sprechen.")
                    .settings.color("red")
                    .center()
                    .print()
