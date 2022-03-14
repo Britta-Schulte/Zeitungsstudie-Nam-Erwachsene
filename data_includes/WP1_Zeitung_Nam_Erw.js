@@ -118,7 +118,7 @@ newTrial("Code",
 //        .center()
 //        .print()
 //,
-    newButton("weiter","zur Anleitung")
+    newButton("weiter","zur Einwilligung")
         .center()
         .print()
         .wait(
